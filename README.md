@@ -8,6 +8,7 @@ PhoneClaw is inspired by Claude Bot/Claude Code and attempts to rebuild the agen
 Live Demo: getsupers.com
 
 Automating Twitter In A Waymo With Android XR
+
 [![Automating Twitter In A Waymo:](https://img.youtube.com/vi/_F5Wfbragh8/0.jpg)](https://www.youtube.com/watch?v=_F5Wfbragh8)
 
 
