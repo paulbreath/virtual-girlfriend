@@ -5,6 +5,9 @@ PhoneClaw is inspired by Claude Bot/Claude Code and attempts to rebuild the agen
 
 **Demos**
 
+Live demo: getsupers.com
+[![getsupers.com](https://github.com/rohanarun/phoneclaw/blob/main/SuperPowers%204.png?raw=true)](getsupers.com)
+
 
 Automating Twitter In A Waymo With Android XR
 
