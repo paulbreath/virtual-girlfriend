@@ -1,21 +1,52 @@
 # Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# ========== 安全相关规则 ==========
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# 保护 BuildConfig（不要混淆）
+-keep class com.example.universal.BuildConfig { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# 保护 SecurityUtils
+-keep class com.example.universal.SecurityUtils { *; }
+-keep class com.example.universal.LogSecurity { *; }
+
+# 保护枚举
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# 混淆网络请求相关（防止直接看到 API 调用）
+-keepclassmembers,allowobfuscation class * {
+    @javax.inject.* <fields>;
+    @javax.inject.* <methods>;
+}
+
+# OkHttp
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# Kotlin Coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+
+# Firebase
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+
+# 移除日志（Release 打包时完全移除）
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+-assumenosideeffects class com.example.universal.LogSecurity {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+
+# 混淆 PackageInfo（增加逆向难度）
+- obfuscationmapping.txt
+- printmapping mapping.txt

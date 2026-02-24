@@ -21,15 +21,34 @@ android {
             ?.replace("\"", "\\\"")
             ?: ""
         buildConfigField("String", "MOONDREAM_AUTH", "\"$moondreamAuth\"")
+
+        val puterAuthToken = (project.findProperty("PUTER_AUTH_TOKEN") as String?)
+            ?.replace("\"", "\\\"")
+            ?: ""
+        buildConfigField("String", "PUTER_AUTH_TOKEN", "\"$puterAuthToken\"")
+
+        val zImageApiKey = (project.findProperty("ZIMAGE_API_KEY") as String?)
+            ?.replace("\"", "\\\"")
+            ?: ""
+        buildConfigField("String", "ZIMAGE_API_KEY", "\"$zImageApiKey\"")
+
+        val grokApiKey = (project.findProperty("GROK_API_KEY") as String?)
+            ?.replace("\"", "\\\"")
+            ?: ""
+        buildConfigField("String", "GROK_API_KEY", "\"$grokApiKey\"")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
         }
     }
     compileOptions {
