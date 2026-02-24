@@ -8728,12 +8728,12 @@ Generate JavaScript automation code for the user's command:
         fun sendWechatMessage(contactName: String, message: String) {
             mainScope.launch {
                 try {
-                    speakText("正在通过微信给 $contactName 发消息")
+                    this@MainActivity.speakText("正在通过微信给 $contactName 发消息")
                     
                     val wechatIntent = packageManager.getLaunchIntentForPackage("com.tencent.mm")
                     
                     if (wechatIntent == null) {
-                        speakText("未找到微信应用")
+                        this@MainActivity.speakText("未找到微信应用")
                         return@launch
                     }
                     

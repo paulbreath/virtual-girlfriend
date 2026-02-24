@@ -74,7 +74,11 @@ object SecurityUtils {
                 context.packageName,
                 android.content.pm.PackageManager.GET_SIGNATURES
             )
-            val signature = packageInfo.signatures[0]
+            val signatures = packageInfo.signatures
+            if (signatures == null || signatures.isEmpty()) {
+                return "unknown"
+            }
+            val signature = signatures[0]
             val digest = MessageDigest.getInstance("SHA")
             val hash = digest.digest(signature.toByteArray())
             return hash.joinToString("") { "%02x".format(it) }
